@@ -9,8 +9,18 @@ wheels/
 # Virtual environments
 .venv
 
+# Local caches and operating-system files
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+Thumbs.db
+.coverage
+htmlcov/
+
 # Local secrets
 .env
+.env.*
+!.env.example
 
 # Generated extraction reports
-data/processed/*.json
+data/processed/

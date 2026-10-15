@@ -1,88 +1,128 @@
 # Contract Intelligence Pipeline
 
-## Overview
+A Python learning project that extracts contracting parties, agreement dates,
+and governing law from commercial contracts using Gemini, validates the output
+with Pydantic, and evaluates it against CUAD reference answers.
 
-A production-style document intelligence system that extracts structured information from commercial contracts using Google Gemini.
+The project uses a modular monolith. Milestones 1 and 2 are complete; PDF
+parsing and the application interface are planned.
 
-The project uses the Contract Understanding Atticus Dataset (CUAD) for evaluation against expert-annotated reference answers.
+## Setup
 
-## Technology Stack
+Requires Python 3.12 or newer and [uv](https://docs.astral.sh/uv/).
 
-- Python 3.12
-- Google Gemini SDK
-- Pydantic
-- Pandas
-- Docling (later stage)
-- FastAPI (later stage)
-- DuckDB (later stage)
-- pytest
-- Docker (later stage)
+```sh
+uv sync --locked
+cp .env.example .env
+```
 
-## Initial Extraction Fields
+Set `GEMINI_API_KEY` and `GEMINI_MODEL` in `.env`. The key stays local and is
+excluded from Git. Live extraction sends contract text to Gemini and uses API
+quota; automated tests use mocked responses.
 
-1. Contracting parties
-2. Agreement date
-3. Governing law
+## Usage
 
-## Initial Workflow
-
-Contract TXT → Gemini → Pydantic Validation → JSON → CUAD Evaluation
-
-## Run a Single Extraction
-
-Create `.env` from `.env.example` and set `GEMINI_API_KEY` and `GEMINI_MODEL`.
-Then run:
+Run one contract:
 
 ```sh
 uv run python main.py "data/raw/contracts/CybergyHoldingsInc_20140520_10-Q_EX-10.27_8605784_EX-10.27_Affiliate Agreement.txt"
 ```
 
-The command prints validated extraction JSON and field-level CUAD evaluation.
-Comparisons normalize party order, aliases in parentheses, punctuation, case,
-whitespace, and date formats. Mismatches remain visible for manual review;
-unsupported reference date formats receive a null match rather than a score.
-Each run saves a timestamped JSON report in `data/processed/`, containing the
-source filename, model, UTC start time, extraction, evaluation, processing time,
-and input/output/thinking/total token counts reported by Gemini. Unavailable
-token counts are null. Processing time covers reading through evaluation,
-excluding report saving. Repeated runs keep separate reports.
+Run the seven-contract sample:
 
-Run evaluation tests with `uv run python -m pytest`.
+```sh
+uv run python main.py data/raw/contracts/batch_sample
+```
 
-## Development Milestones
+The batch processes direct TXT files sequentially in filename order; it does
+not recurse into subfolders. One failed contract does not stop the batch.
+Inputs currently need a matching filename in `data/raw/master_clauses.csv`.
+Processing new contracts without reference answers is future work.
 
-This is the agreed project roadmap. Milestone 1 is complete; milestones 2–7
-are planned in the order below. Keep implementation minimal and simple, using
-a modular monolith. CUAD sample contracts will support learning and evaluation;
-personal contracts are not required.
+## Workflow and results
+
+```text
+Contract TXT → Gemini → Pydantic validation → CUAD comparison → JSON report
+```
+
+Each run prints and saves a timestamped report in `data/processed/`, including
+extracted values, supporting quotes, reference comparisons, evidence checks,
+review reasons, processing time and token usage. A batch summary includes
+individual results and aggregate counts. Generated runs remain local and are
+excluded from Git; repeated runs retain separate reports.
+
+Extraction and evaluation conventions:
+
+- Preserve named contracting parties and stated trading names. Do not invent
+  missing template identities or unnamed affiliates.
+- For combined numbered amendments, target the highest numbered amendment.
+- Select dates in order: explicit agreement date, explicitly linked date
+  definition, then execution-supported latest signature date as a fallback.
+  Record the selection `basis`; incomplete dates stay null.
+- Evidence can contain one quote or separate quotes. Check source presence
+  after whitespace normalization; presence alone does not prove correctness.
+- Normalize explicit aliases, collective descriptions, jurisdiction prefixes
+  and supported date formats conservatively. Preserve meaningful legal-name
+  and jurisdiction scope differences. Unsupported references remain unscored.
+
+Reference match rates are not guaranteed extraction accuracy. Missing-reference
+matches are counted separately from populated fields; failed or unavailable
+usage is not assumed to be zero tokens. Processing time covers reading through
+evaluation and evidence checking, excluding report saving.
+
+## Validation
+
+```sh
+uv run python -m pytest -q
+uv run ruff check app main.py tests
+```
+
+Milestone 2 closed on 15 October 2026. The
+[consolidated results](MILESTONE_2_RESULTS.md) cover 63 unique tested contracts,
+with extracted/reference answers, evidence and review findings separated by
+prompt version. The final 20 unseen contracts completed successfully; old cases
+were not rerun for that report. All 33 automated tests passed at closeout.
+
+Known limitations include stated-date versus signature-date conventions,
+collective-party cleanup, unknown/affiliate scope, and multi-jurisdiction
+representations. These remain review cases, not forced matches.
+
+## Repository layout
+
+```text
+app/
+  core/config.py          Environment settings and data paths
+  extraction/             Prompt, Pydantic schemas and Gemini client
+  evaluation/cuad.py      Reference lookup and comparison rules
+  pipeline.py             Single-contract and batch processing
+main.py                   Command-line entry point
+tests/                    Mocked pipeline and evaluation tests
+data/raw/                 CUAD reference CSV and tested contract samples
+data/validation_manifest.json  Sample provenance and source hashes
+MILESTONE_2_RESULTS.md     Consolidated evaluation findings
+```
+
+## Dataset
+
+The included reference CSV and contract samples come from CUAD v1, curated by
+[The Atticus Project](https://github.com/TheAtticusProject/cuad).
+See the [dataset paper](https://arxiv.org/abs/2103.06268) for background.
+The [validation manifest](data/validation_manifest.json) identifies the 63 tested
+TXT files, their source hashes and result cohorts. The original sample PDF is
+retained for the upcoming parsing milestone. The samples are a development set,
+not a representative accuracy benchmark.
+
+## Roadmap
+
+Keep implementation minimal and modular. Extraction remains focused on the
+three initial fields; testing continues throughout development.
 
 | Milestone | What we'll build | Completion criteria |
 | --- | --- | --- |
 | **1. Contract extraction MVP — complete** | Read a TXT contract, extract and validate three fields using Gemini, compare against CUAD, and save results with time and token usage. | A single-contract run produces a validated JSON report with evaluation and usage. |
-| **2. Batch processing and evaluation** | Process multiple TXT contracts, handle individual failures, and summarize accuracy, time, and tokens. | A batch completes despite individual failures, with results and a useful summary. |
+| **2. Batch processing and evaluation — complete** | Process multiple TXT contracts, handle individual failures, and summarize accuracy, time, and tokens. | A batch completes despite individual failures, with results and a useful summary. |
 | **3. PDF parsing** | Use Docling to convert PDFs into text and feed our existing pipeline. | PDF extraction works on representative contracts, with parsing failures reported clearly. |
 | **4. FastAPI service** | Add a contract-upload endpoint that runs parsing and extraction. | Uploading a PDF returns structured results or a clear error. |
 | **5. Storage** | Use DuckDB to retain processing records, extracted fields, evaluation where available, and usage. | Previous results can be listed and retrieved after restarting the application. |
 | **6. Upload and review interface** | Add a simple screen to upload contracts, inspect values and evidence, view history, and download JSON. | A user can complete the workflow without running commands. |
 | **7. Reliability and packaging** | Complete meaningful tests, improve error handling and logging, add Docker, and document setup. | The application runs reproducibly and handles common failure cases. |
-
-Tests will be added throughout development. Extraction remains focused on
-contracting parties, agreement date, and governing law. CUAD contracts can be
-evaluated against reference answers; new contracts without reference answers
-will provide extracted values and evidence for review, without an accuracy score.
-
-## Project Goal
-
-Learn to design, implement, evaluate and maintain a reliable, production-style AI document processing system.
-
-## Milestone 1 — Contract Extraction MVP
-
-Completed requirements:
-
-- [x] Read a CUAD contract from a local TXT file
-- [x] Extract parties, agreement date and governing law using Gemini
-- [x] Return a structured JSON response
-- [x] Validate the JSON using Pydantic
-- [x] Compare extracted values against master_clauses.csv
-- [x] Record processing time and token usage
-- [x] Save the extraction result locally

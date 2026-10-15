@@ -7,6 +7,7 @@ from google.genai import types
 import main
 from app.core.config import Settings
 from app.extraction import gemini_client
+from app.extraction.schemas import ContractExtraction
 
 
 @pytest.mark.parametrize("has_usage", [True, False])
@@ -61,3 +62,43 @@ def test_pipeline_saves_report(tmp_path, monkeypatch, has_usage):
     }
     assert all(field["match"] for field in report["evaluation"].values())
     assert "test-key" not in reports[0].read_text(encoding="utf-8")
+
+
+def test_separate_evidence_quotes_and_source_check():
+    source = "Entered into as of the Effective Date.\nEffective Date means May 8, 2014."
+    extraction = ContractExtraction.model_validate(
+        {
+            "parties": [],
+            "agreement_date": {
+                "value": "2014-05-08",
+                "basis": "defined_date",
+                "evidence": [
+                    "Entered into as of the Effective Date.",
+                    "Effective Date means May 8, 2014.",
+                ],
+            },
+            "governing_law": {"value": "Nevada", "evidence": "Laws of Nevada."},
+        }
+    )
+    checks = extraction.check_evidence(source)
+    assert all(c["found_in_source"] for c in checks["agreement_date"])
+    assert checks["governing_law"][0]["found_in_source"] is False
+    extraction.agreement_date.evidence = "Entered into ... May 8, 2014."
+    assert (
+        extraction.check_evidence(source)["agreement_date"][0]["found_in_source"]
+        is False
+    )
+
+
+@pytest.mark.parametrize("evidence", ["", [], [""]])
+def test_empty_evidence_is_invalid(evidence):
+    from pydantic import ValidationError
+
+    with pytest.raises(ValidationError):
+        ContractExtraction.model_validate(
+            {
+                "parties": [{"value": "Alpha", "evidence": evidence}],
+                "agreement_date": None,
+                "governing_law": None,
+            }
+        )

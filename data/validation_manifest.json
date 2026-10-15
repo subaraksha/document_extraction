@@ -1,0 +1,416 @@
+{
+  "dataset": "CUAD v1, The Atticus Project",
+  "dataset_source": "https://github.com/TheAtticusProject/cuad",
+  "tested_contracts": 63,
+  "description": "Tested TXT samples included for reproducibility. Result cohorts refer to MILESTONE_2_RESULTS.md. Historical per-run JSON stays local in ignored data/processed/. No old cases were re-extracted for the final report.",
+  "final_20_selection": {
+    "seed": 20261017,
+    "method": "20 previously unused CUAD contracts, four per targeted category; <=200,000 bytes each. Signature-date group contains signature blocks, not a guarantee of signature-only agreement dates. Targeted development validation, not a representative sample.",
+    "implementation_sha256": {
+      "app/extraction/prompts.py": "3d04281d766f11672903766d5cb7b4b9bff955c602e065794931a84c78bce42e",
+      "app/extraction/schemas.py": "8be0637e6c30273c48c6aa8634df6dc09ac7d1a791d2f67b37cf9da59273a975",
+      "app/evaluation/cuad.py": "0b303c8a872b317bfa67d961e92a27a77f7b4798d2d9f96a10ca4ccecc43a123",
+      "app/pipeline.py": "8dcef3546f584b2d262eef24abe546c6d2fab76457b8c2da904581357f8f8d49"
+    }
+  },
+  "contracts": [
+    {
+      "filename": "CybergyHoldingsInc_20140520_10-Q_EX-10.27_8605784_EX-10.27_Affiliate Agreement.txt",
+      "path": "data/raw/contracts/CybergyHoldingsInc_20140520_10-Q_EX-10.27_8605784_EX-10.27_Affiliate Agreement.txt",
+      "sha256": "1b75149a48763374ea9c10fe351848153b469499c9b3171565b41bdbd45a0f8d",
+      "result_cohort": "Initial MVP"
+    },
+    {
+      "filename": "ArtaraTherapeuticsInc_20200110_8-K_EX-10.5_11943350_EX-10.5_License Agreement.txt",
+      "path": "data/raw/contracts/validation_sample/ArtaraTherapeuticsInc_20200110_8-K_EX-10.5_11943350_EX-10.5_License Agreement.txt",
+      "sha256": "aa63496b5011130a8704272a732ce09d5ccea0103437b90a5cf4caa05fed3039",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "BLACKBOXSTOCKSINC_08_05_2014-EX-10.1-DISTRIBUTOR AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_sample/BLACKBOXSTOCKSINC_08_05_2014-EX-10.1-DISTRIBUTOR AGREEMENT.txt",
+      "sha256": "0d2edecafe20a5de97f47ed19b08e2df988b3471e3da810944017ec8675adba5",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "CardlyticsInc_20180112_S-1_EX-10.16_11002987_EX-10.16_Maintenance Agreement2.txt",
+      "path": "data/raw/contracts/validation_sample/CardlyticsInc_20180112_S-1_EX-10.16_11002987_EX-10.16_Maintenance Agreement2.txt",
+      "sha256": "e6b28bd103980fa0e8d72c358702ac528a94cdd404a6112c32a083b182d2863c",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "CORIOINC_07_20_2000-EX-10.5-LICENSE AND HOSTING AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_sample/CORIOINC_07_20_2000-EX-10.5-LICENSE AND HOSTING AGREEMENT.txt",
+      "sha256": "01ce3afc80c5e4c08465c0f361e4c19bf2989d4e9657091af2cb32ecd9aea4c0",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "FUSIONPHARMACEUTICALSINC_06_05_2020-EX-10.17-Supply Agreement - FUSION.txt",
+      "path": "data/raw/contracts/validation_sample/FUSIONPHARMACEUTICALSINC_06_05_2020-EX-10.17-Supply Agreement - FUSION.txt",
+      "sha256": "eb41a9d9a47158b95d1354454f8f7ef9405ca779e671e849d5a80f77e4f6ffcd",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "GluMobileInc_20070319_S-1A_EX-10.09_436630_EX-10.09_Content License Agreement1.txt",
+      "path": "data/raw/contracts/validation_sample/GluMobileInc_20070319_S-1A_EX-10.09_436630_EX-10.09_Content License Agreement1.txt",
+      "sha256": "ed6d0e01ab253bf488839d449bc4a98ad1c1d99b0f098c7d09e86b040b24a2ab",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "INTELLIGENTHIGHWAYSOLUTIONS,INC_01_18_2018-EX-10.1-Strategic Alliance Agreement.txt",
+      "path": "data/raw/contracts/validation_sample/INTELLIGENTHIGHWAYSOLUTIONS,INC_01_18_2018-EX-10.1-Strategic Alliance Agreement.txt",
+      "sha256": "b3a2f969a3debf4ba466a2cde59c0f21a744a41f95e4715cec354084dd43164b",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "IpassInc_20181203_8-K_EX-99.1_11445874_EX-99.1_Reseller Agreement.txt",
+      "path": "data/raw/contracts/validation_sample/IpassInc_20181203_8-K_EX-99.1_11445874_EX-99.1_Reseller Agreement.txt",
+      "sha256": "2489555c05b1ec60186a8e703b4c92f243afc1ee2d093328d3f3f60b6a741052",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "MPLXLP_06_17_2015-EX-10.1-TRANSPORTATION SERVICES AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_sample/MPLXLP_06_17_2015-EX-10.1-TRANSPORTATION SERVICES AGREEMENT.txt",
+      "sha256": "32b7190fa5a4ac20ef10f18328b16f85d8df5bcc88384ce6fabec16cf6071b8f",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "OASYSMOBILE,INC_07_05_2001-EX-10.17-OUTSOURCING AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_sample/OASYSMOBILE,INC_07_05_2001-EX-10.17-OUTSOURCING AGREEMENT.txt",
+      "sha256": "7c6e1cf6dd98979a0f32ffca628d15a3b51e560ed675bb7ae051a088c8a89fc7",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "OMINTO,INC_03_29_2004-EX-10-RESELLER AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_sample/OMINTO,INC_03_29_2004-EX-10-RESELLER AGREEMENT.txt",
+      "sha256": "63c4ce209111a2920d803f15cb0f1ca5c1919368cad08862fea3ce0923870e55",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "ParatekPharmaceuticalsInc_20170505_10-KA_EX-10.29_10323872_EX-10.29_Outsourcing Agreement.txt",
+      "path": "data/raw/contracts/validation_sample/ParatekPharmaceuticalsInc_20170505_10-KA_EX-10.29_10323872_EX-10.29_Outsourcing Agreement.txt",
+      "sha256": "dcd5345df0e45ae2954d2601ceacb0eec003128ec081ff4a8888ad9025f449d3",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "PFSFUNDS_06_26_2020-EX-99.H OTH MAT CONT-SERVICES AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_sample/PFSFUNDS_06_26_2020-EX-99.H OTH MAT CONT-SERVICES AGREEMENT.txt",
+      "sha256": "5e5547691fe99cd023da22a15b906d7c5d506a416da4902a653efea4900170e4",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "RaeSystemsInc_20001114_10-Q_EX-10.57_2631790_EX-10.57_Co-Branding Agreement.txt",
+      "path": "data/raw/contracts/validation_sample/RaeSystemsInc_20001114_10-Q_EX-10.57_2631790_EX-10.57_Co-Branding Agreement.txt",
+      "sha256": "a98e1239e03d1dfb34c31eb10d553e43c43b85a8f17434561de1b05a73654cde",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "ReynoldsConsumerProductsInc_20200121_S-1A_EX-10.22_11948918_EX-10.22_Service Agreement.txt",
+      "path": "data/raw/contracts/validation_sample/ReynoldsConsumerProductsInc_20200121_S-1A_EX-10.22_11948918_EX-10.22_Service Agreement.txt",
+      "sha256": "0ddc8b40e5ad7b4f6b1a9d2a921cc7ab2e5d4076a4dcd2575b10b59fc2e6f6d2",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "SalesforcecomInc_20171122_10-Q_EX-10.1_10961535_EX-10.1_Reseller Agreement.txt",
+      "path": "data/raw/contracts/validation_sample/SalesforcecomInc_20171122_10-Q_EX-10.1_10961535_EX-10.1_Reseller Agreement.txt",
+      "sha256": "8157870fe900e2e550ed1bfbdc9050a82727f3dccf5da57243a1b5149a25863d",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "SoupmanInc_20150814_8-K_EX-10.1_9230148_EX-10.1_Franchise Agreement1.txt",
+      "path": "data/raw/contracts/validation_sample/SoupmanInc_20150814_8-K_EX-10.1_9230148_EX-10.1_Franchise Agreement1.txt",
+      "sha256": "9009d53b3f1c416872fa6d70cdc98940f7c62f25523b76b3fe231f0e11b3d0dc",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "TICKETSCOMINC_06_22_1999-EX-10.22-SPONSORSHIP AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_sample/TICKETSCOMINC_06_22_1999-EX-10.22-SPONSORSHIP AGREEMENT.txt",
+      "sha256": "4928e56782c0c6c8d589f9ceb019dc418e38b7b324be28f49a20a81b03d1eaa7",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "TomOnlineInc_20060501_20-F_EX-4.46_749700_EX-4.46_Co-Branding Agreement.txt",
+      "path": "data/raw/contracts/validation_sample/TomOnlineInc_20060501_20-F_EX-4.46_749700_EX-4.46_Co-Branding Agreement.txt",
+      "sha256": "1c475f59db3b10b7165246b64eec22328ace5caec1960723e24d94aeaaf7471e",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "UAGHINC_04_14_2004-EX-10.18-MAINTENANCE AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_sample/UAGHINC_04_14_2004-EX-10.18-MAINTENANCE AGREEMENT.txt",
+      "sha256": "357149c870e8edc3d56935a44a10fe0ecdd4db2381e3cd1fd72c0eadbe200bde",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "VnueInc_20150914_8-K_EX-10.1_9259571_EX-10.1_Promotion Agreement.txt",
+      "path": "data/raw/contracts/validation_sample/VnueInc_20150914_8-K_EX-10.1_9259571_EX-10.1_Promotion Agreement.txt",
+      "sha256": "1cf474e83b78700c764b3d756a6ad0c4720327f851361993144fe2e734144f7d",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "WESTERN COPPER - NON-COMPETITION AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_sample/WESTERN COPPER - NON-COMPETITION AGREEMENT.txt",
+      "sha256": "d148e0be306beafca1731bbda95efdd7d3fa21be087c5b1a56bdd51b3433f9aa",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "XinhuaSportsEntertainmentLtd_20070221_F-1_EX-99.4_645553_EX-99.4_Content License Agreement.txt",
+      "path": "data/raw/contracts/validation_sample/XinhuaSportsEntertainmentLtd_20070221_F-1_EX-99.4_645553_EX-99.4_Content License Agreement.txt",
+      "sha256": "d20ca7099b4894b290f3e0399f466b78ab1cd297bdfc9b270b80528607dcab51",
+      "result_cohort": "Earlier prompt"
+    },
+    {
+      "filename": "ADUROBIOTECH,INC_06_02_2020-EX-10.7-CONSULTING AGREEMENT.txt",
+      "path": "data/raw/contracts/batch_sample/ADUROBIOTECH,INC_06_02_2020-EX-10.7-CONSULTING AGREEMENT.txt",
+      "sha256": "23255988c8f39e0b67d7ff8a2b316a17c3bf4cc0557141d6a7e6e9cc7d770ad3",
+      "result_cohort": "Revised prompt — regression"
+    },
+    {
+      "filename": "Apollo Endosurgery - Manufacturing and Supply Agreement.txt",
+      "path": "data/raw/contracts/validation_sample/Apollo Endosurgery - Manufacturing and Supply Agreement.txt",
+      "sha256": "f408b4d3754ed2f99c86c5092900df88286666c044bf66430c073c9c10a9d734",
+      "result_cohort": "Revised prompt — regression"
+    },
+    {
+      "filename": "BNLFINANCIALCORP_03_30_2007-EX-10.8-OUTSOURCING AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_sample/BNLFINANCIALCORP_03_30_2007-EX-10.8-OUTSOURCING AGREEMENT.txt",
+      "sha256": "8eb79bb4ec5ab5dd06fd2c7633dc91a84cf816736c1ece4d90ec0b8d71f83ab2",
+      "result_cohort": "Revised prompt — regression"
+    },
+    {
+      "filename": "GluMobileInc_20070319_S-1A_EX-10.09_436630_EX-10.09_Content License Agreement4.txt",
+      "path": "data/raw/contracts/batch_sample/GluMobileInc_20070319_S-1A_EX-10.09_436630_EX-10.09_Content License Agreement4.txt",
+      "sha256": "b5dc6d1ea4c6ac711270a5b019707577e67579deb69b5bc6f6507b33a096987c",
+      "result_cohort": "Revised prompt — regression"
+    },
+    {
+      "filename": "GRIDIRONBIONUTRIENTS,INC_02_05_2020-EX-10.3-SUPPLY AGREEMENT.txt",
+      "path": "data/raw/contracts/batch_sample/GRIDIRONBIONUTRIENTS,INC_02_05_2020-EX-10.3-SUPPLY AGREEMENT.txt",
+      "sha256": "afc2435e7661797197d3fbc891439f9d04dd58801e6203c0f43ac83fbdd8ebad",
+      "result_cohort": "Revised prompt — regression"
+    },
+    {
+      "filename": "NETGEAR,INC_04_21_2003-EX-10.16- AMENDMENT #2 TO THE DISTRIBUTION AGREEMENT.txt",
+      "path": "data/raw/contracts/batch_sample/NETGEAR,INC_04_21_2003-EX-10.16- AMENDMENT #2 TO THE DISTRIBUTION AGREEMENT.txt",
+      "sha256": "40b9a08eaf9a9a4cb8062d44af4289e0cb7732b2fe464b083505594978f1b776",
+      "result_cohort": "Revised prompt — regression"
+    },
+    {
+      "filename": "SoupmanInc_20150814_8-K_EX-10.1_9230148_EX-10.1_Franchise Agreement3.txt",
+      "path": "data/raw/contracts/batch_sample/SoupmanInc_20150814_8-K_EX-10.1_9230148_EX-10.1_Franchise Agreement3.txt",
+      "sha256": "d1c74726a00a6c1eb413437fbe539764f8d45d86b077b93b5b48a4b71b2aa048",
+      "result_cohort": "Revised prompt — regression"
+    },
+    {
+      "filename": "UnionDentalHoldingsInc_20050204_8-KA_EX-10_3345577_EX-10_Affiliate Agreement.txt",
+      "path": "data/raw/contracts/batch_sample/UnionDentalHoldingsInc_20050204_8-KA_EX-10_3345577_EX-10_Affiliate Agreement.txt",
+      "sha256": "552913b336a816ccd16a4acfdef63791d383dc26b7483b856cc717bf6e7d9cd1",
+      "result_cohort": "Revised prompt — regression"
+    },
+    {
+      "filename": "VEONEER,INC_02_21_2020-EX-10.11-JOINT VENTURE AGREEMENT.txt",
+      "path": "data/raw/contracts/batch_sample/VEONEER,INC_02_21_2020-EX-10.11-JOINT VENTURE AGREEMENT.txt",
+      "sha256": "c9ab266dd8eeb900805cae1c37539145898f8c58dc6ed13c4b76c438e1bac051",
+      "result_cohort": "Revised prompt — regression"
+    },
+    {
+      "filename": "ALLISONTRANSMISSIONHOLDINGSINC_12_15_2014-EX-99.1-COOPERATION AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_round2/ALLISONTRANSMISSIONHOLDINGSINC_12_15_2014-EX-99.1-COOPERATION AGREEMENT.txt",
+      "sha256": "cf7ccac86b58129ea6ba73b08f2482e87c61e9c228dd64b05291e3ee3601c104",
+      "result_cohort": "Revised prompt — first unseen set"
+    },
+    {
+      "filename": "BLUEROCKRESIDENTIALGROWTHREIT,INC_06_01_2016-EX-1.1-AGENCY AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_round2/BLUEROCKRESIDENTIALGROWTHREIT,INC_06_01_2016-EX-1.1-AGENCY AGREEMENT.txt",
+      "sha256": "54c6d5857db6f23b8915955e0e6935f00ce31c3deea2291b2e66b57101ae1f60",
+      "result_cohort": "Revised prompt — first unseen set"
+    },
+    {
+      "filename": "EMERALDHEALTHTHERAPEUTICSINC_06_10_2020-EX-4.5-CONSULTING AGREEMENT - DR. GAETANO MORELLO N.D. INC..txt",
+      "path": "data/raw/contracts/validation_round2/EMERALDHEALTHTHERAPEUTICSINC_06_10_2020-EX-4.5-CONSULTING AGREEMENT - DR. GAETANO MORELLO N.D. INC..txt",
+      "sha256": "e9b670a117b0093c45379e52dd4aca10ae2e7f5e7460d89816e6546ff7875d96",
+      "result_cohort": "Revised prompt — first unseen set"
+    },
+    {
+      "filename": "EuromediaHoldingsCorp_20070215_10SB12G_EX-10.B(01)_525118_EX-10.B(01)_Content License Agreement.txt",
+      "path": "data/raw/contracts/validation_round2/EuromediaHoldingsCorp_20070215_10SB12G_EX-10.B(01)_525118_EX-10.B(01)_Content License Agreement.txt",
+      "sha256": "410d3d3ff1c928befd4d2c5f405cc1215f4687db744c5abf1e98adefd97d7478",
+      "result_cohort": "Revised prompt — first unseen set"
+    },
+    {
+      "filename": "INGEVITYCORP_05_16_2016-EX-10.5-INTELLECTUAL PROPERTY AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_round2/INGEVITYCORP_05_16_2016-EX-10.5-INTELLECTUAL PROPERTY AGREEMENT.txt",
+      "sha256": "d7eaeae37b293bb0530fb5ff9a62692bd4946598905f1093a534589dd9a32af1",
+      "result_cohort": "Revised prompt — first unseen set"
+    },
+    {
+      "filename": "N2KINC_10_16_1997-EX-10.16-SPONSORSHIP AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_round2/N2KINC_10_16_1997-EX-10.16-SPONSORSHIP AGREEMENT.txt",
+      "sha256": "3d51fb71a4d06f8185ebfdb7c3feae4fa2935d9fc75951cdfc4aaff4b5733b07",
+      "result_cohort": "Revised prompt — first unseen set"
+    },
+    {
+      "filename": "PACIFICSYSTEMSCONTROLTECHNOLOGYINC_08_24_2000-EX-10.53-SPONSORSHIP AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_round2/PACIFICSYSTEMSCONTROLTECHNOLOGYINC_08_24_2000-EX-10.53-SPONSORSHIP AGREEMENT.txt",
+      "sha256": "5737af7072e7d2a4600667b0ba69e0068ec69632deaf849d7eece7bfb9fedb2c",
+      "result_cohort": "Revised prompt — first unseen set"
+    },
+    {
+      "filename": "PrecheckHealthServicesInc_20200320_8-K_EX-99.2_12070169_EX-99.2_Distributor Agreement.txt",
+      "path": "data/raw/contracts/validation_round2/PrecheckHealthServicesInc_20200320_8-K_EX-99.2_12070169_EX-99.2_Distributor Agreement.txt",
+      "sha256": "beee329d09f6bd58196158ac36e7a86ad2f6a85be51594d77cf766e979c214fc",
+      "result_cohort": "Revised prompt — first unseen set"
+    },
+    {
+      "filename": "RISEEDUCATIONCAYMANLTD_04_17_2020-EX-4.23-SERVICE AGREEMENT.txt",
+      "path": "data/raw/contracts/validation_round2/RISEEDUCATIONCAYMANLTD_04_17_2020-EX-4.23-SERVICE AGREEMENT.txt",
+      "sha256": "4d9af82e13bc95c4459e66c7d19439753237bc89e6e4bf10819aedcc4018534f",
+      "result_cohort": "Revised prompt — first unseen set"
+    },
+    {
+      "filename": "SENMIAOTECHNOLOGYLTD_02_19_2019-EX-10.5-Collaboration Agreement.txt",
+      "path": "data/raw/contracts/validation_round2/SENMIAOTECHNOLOGYLTD_02_19_2019-EX-10.5-Collaboration Agreement.txt",
+      "sha256": "8da2c49973d8fb73e5107a17b76c10c7cbf38fdb97b6235e9ab77446c9c8de0a",
+      "result_cohort": "Revised prompt — first unseen set"
+    },
+    {
+      "filename": "ArcGroupInc_20171211_8-K_EX-10.1_10976103_EX-10.1_Sponsorship Agreement.txt",
+      "path": "data/raw/contracts/final_validation_sample/ArcGroupInc_20171211_8-K_EX-10.1_10976103_EX-10.1_Sponsorship Agreement.txt",
+      "sha256": "4f6122be05857c75d5ea3bd3be66bcceaab1a968e276330f8d7ee60e694d1fec",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "missing_or_partial"
+    },
+    {
+      "filename": "BellringBrandsInc_20190920_S-1_EX-10.12_11817081_EX-10.12_Manufacturing Agreement2.txt",
+      "path": "data/raw/contracts/final_validation_sample/BellringBrandsInc_20190920_S-1_EX-10.12_11817081_EX-10.12_Manufacturing Agreement2.txt",
+      "sha256": "f7c0f6916366509e9e27a7e89ff4658bf08533469d01b633a9ecb903eb856e0b",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "amendments"
+    },
+    {
+      "filename": "CHINARECYCLINGENERGYCORP_11_14_2013-EX-10.6-Cooperation Agreement.txt",
+      "path": "data/raw/contracts/final_validation_sample/CHINARECYCLINGENERGYCORP_11_14_2013-EX-10.6-Cooperation Agreement.txt",
+      "sha256": "8c0683c882687f9e6ba6241a62fd38f0327ba044d97f6020812b41662255b5ce",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "missing_or_partial"
+    },
+    {
+      "filename": "FuelcellEnergyInc_20191106_8-K_EX-10.1_11868007_EX-10.1_Development Agreement.txt",
+      "path": "data/raw/contracts/final_validation_sample/FuelcellEnergyInc_20191106_8-K_EX-10.1_11868007_EX-10.1_Development Agreement.txt",
+      "sha256": "c809f579e6b5b0da201af7300efc64f0afd7b0757e060bab1b625f80a8e29ee5",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "signature_dates"
+    },
+    {
+      "filename": "GluMobileInc_20070319_S-1A_EX-10.09_436630_EX-10.09_Content License Agreement2.txt",
+      "path": "data/raw/contracts/final_validation_sample/GluMobileInc_20070319_S-1A_EX-10.09_436630_EX-10.09_Content License Agreement2.txt",
+      "sha256": "ab313de5385c0998e3242d39c567f21c4297e4f1c9eafbda33998f330deda36c",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "amendments"
+    },
+    {
+      "filename": "GSVINC_05_15_1998-EX-10-SPONSORSHIP AGREEMENT.txt",
+      "path": "data/raw/contracts/final_validation_sample/GSVINC_05_15_1998-EX-10-SPONSORSHIP AGREEMENT.txt",
+      "sha256": "cceff2701a7aa0637a74b359d4b1fca764a3e562f37fda200817e3ff6b9199af",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "signature_dates"
+    },
+    {
+      "filename": "INNOVIVA,INC_08_07_2014-EX-10.1-COLLABORATION AGREEMENT.txt",
+      "path": "data/raw/contracts/final_validation_sample/INNOVIVA,INC_08_07_2014-EX-10.1-COLLABORATION AGREEMENT.txt",
+      "sha256": "6885da43f470be15f67ecf5be03d1006d27cf88e11aeef8bf478d81f71e0c7e2",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "party_scope"
+    },
+    {
+      "filename": "KINGPHARMACEUTICALSINC_08_09_2006-EX-10.1-PROMOTION AGREEMENT.txt",
+      "path": "data/raw/contracts/final_validation_sample/KINGPHARMACEUTICALSINC_08_09_2006-EX-10.1-PROMOTION AGREEMENT.txt",
+      "sha256": "92a552b93eee815071993af2c822aa2133f5588b3bf6dcec3de7e07bfa542d6a",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "party_scope"
+    },
+    {
+      "filename": "LegacyEducationAllianceInc_20141110_8-K_EX-10.9_8828866_EX-10.9_Endorsement Agreement.txt",
+      "path": "data/raw/contracts/final_validation_sample/LegacyEducationAllianceInc_20141110_8-K_EX-10.9_8828866_EX-10.9_Endorsement Agreement.txt",
+      "sha256": "58078cc191465e413069fc8ab1a717e56e50e10ca476f5f79f734d0638943280",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "jurisdiction_detail"
+    },
+    {
+      "filename": "LIGHTBRIDGECORP_11_23_2015-EX-10.26-STRATEGIC ALLIANCE AGREEMENT.txt",
+      "path": "data/raw/contracts/final_validation_sample/LIGHTBRIDGECORP_11_23_2015-EX-10.26-STRATEGIC ALLIANCE AGREEMENT.txt",
+      "sha256": "66048676c514d1e73a6b892b6a586971c8f54d5c8041b9fff2e98df3a443bffb",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "party_scope"
+    },
+    {
+      "filename": "NEONSYSTEMSINC_03_01_1999-EX-10.5-DISTRIBUTOR AGREEMENT_Amendment.txt",
+      "path": "data/raw/contracts/final_validation_sample/NEONSYSTEMSINC_03_01_1999-EX-10.5-DISTRIBUTOR AGREEMENT_Amendment.txt",
+      "sha256": "9efa34e33b135d9bdc6e0fa949b22953b5a1675efa39c7222cf7d2ddc2251ebf",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "missing_or_partial"
+    },
+    {
+      "filename": "OPERALTD_04_30_2020-EX-4.14-SERVICE AGREEMENT.txt",
+      "path": "data/raw/contracts/final_validation_sample/OPERALTD_04_30_2020-EX-4.14-SERVICE AGREEMENT.txt",
+      "sha256": "579818d20eb50a9cb9893ff4dea109b70d2e74094c06489a994506b2079414fa",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "party_scope"
+    },
+    {
+      "filename": "QBIOMEDINC_04_08_2020-EX-99.1-JOINT FILING AGREEMENT.txt",
+      "path": "data/raw/contracts/final_validation_sample/QBIOMEDINC_04_08_2020-EX-99.1-JOINT FILING AGREEMENT.txt",
+      "sha256": "dd57e29b914eaf534f0f05b48b98394d61cd8925cde25a5cf9b72f43e2c40e95",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "signature_dates"
+    },
+    {
+      "filename": "ScansourceInc_20190822_10-K_EX-10.39_11793959_EX-10.39_Distributor Agreement.txt",
+      "path": "data/raw/contracts/final_validation_sample/ScansourceInc_20190822_10-K_EX-10.39_11793959_EX-10.39_Distributor Agreement.txt",
+      "sha256": "73c1a2a9f68cdab2e62518200def5559058e20553d14f8dff4a6b7574d516416",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "amendments"
+    },
+    {
+      "filename": "SLINGERBAGINC_05_27_2020-EX-10.7-CONSULTING AGREEMENT.txt",
+      "path": "data/raw/contracts/final_validation_sample/SLINGERBAGINC_05_27_2020-EX-10.7-CONSULTING AGREEMENT.txt",
+      "sha256": "2ab2f2c768a8cd5dab726a17b764a96b49d227350e3a534ae2a1adff914eb38a",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "missing_or_partial"
+    },
+    {
+      "filename": "SMITHELECTRICVEHICLESCORP_04_04_2012-EX-10.26-FLEET MAINTENANCE AGREEMENT.txt",
+      "path": "data/raw/contracts/final_validation_sample/SMITHELECTRICVEHICLESCORP_04_04_2012-EX-10.26-FLEET MAINTENANCE AGREEMENT.txt",
+      "sha256": "292f4fdd8046cbbc420982a39675973dd70c9859ee56e68dbd95eb74c53e0da5",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "jurisdiction_detail"
+    },
+    {
+      "filename": "SPARKLINGSPRINGWATERHOLDINGSLTD_07_03_2002-EX-10.13-SOFTWARE LICENSE AND MAINTENANCE AGREEMENT.txt",
+      "path": "data/raw/contracts/final_validation_sample/SPARKLINGSPRINGWATERHOLDINGSLTD_07_03_2002-EX-10.13-SOFTWARE LICENSE AND MAINTENANCE AGREEMENT.txt",
+      "sha256": "0c1d630fd900445bbf248da583ad3dd0c5b051a7f96e574c13839efdd7383490",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "jurisdiction_detail"
+    },
+    {
+      "filename": "VgrabCommunicationsInc_20200129_10-K_EX-10.33_11958828_EX-10.33_Development Agreement.txt",
+      "path": "data/raw/contracts/final_validation_sample/VgrabCommunicationsInc_20200129_10-K_EX-10.33_11958828_EX-10.33_Development Agreement.txt",
+      "sha256": "7dce71c812ecc7cf1d1b1f366eae70cbd1bebf1c3b3ce3023541cd50577325b2",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "jurisdiction_detail"
+    },
+    {
+      "filename": "VIVINT SOLAR, INC. - NON-COMPETITION AGREEMENT.txt",
+      "path": "data/raw/contracts/final_validation_sample/VIVINT SOLAR, INC. - NON-COMPETITION AGREEMENT.txt",
+      "sha256": "fc312da6f40b38046396f30b7ed00ca644ed82d35b5dbe40bb48615e9e837270",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "amendments"
+    },
+    {
+      "filename": "XENCORINC_10_25_2013-EX-10.24-COLLABORATION AGREEMENT (3).txt",
+      "path": "data/raw/contracts/final_validation_sample/XENCORINC_10_25_2013-EX-10.24-COLLABORATION AGREEMENT (3).txt",
+      "sha256": "afa8a94a1c6252861882320a9d28516ea5b4b8a4e0215e9b2213f442a2528540",
+      "result_cohort": "Revised prompt — final unseen set",
+      "final_run_category": "signature_dates"
+    }
+  ]
+}

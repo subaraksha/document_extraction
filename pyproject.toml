@@ -1,12 +1,11 @@
 [project]
 name = "document-extraction"
 version = "0.1.0"
-description = "Add your description here"
+description = "Contract field extraction and CUAD evaluation using Gemini"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "google-genai>=2.30.0",
-    "pandas>=3.0.6",
     "pydantic>=2.14.1",
     "python-dotenv>=1.2.4",
 ]

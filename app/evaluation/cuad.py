@@ -26,31 +26,67 @@ def normalize_text(value: str) -> str:
 
 
 def normalize_law(value: str | None) -> str:
-    return re.sub(r"^state of ", "", normalize_text(value or ""))
+    return re.sub(r"^(?:the )?(?:state|province) of ", "", normalize_text(value or ""))
+
+
+def reference_parties(answer: str) -> tuple[list[str], list[str]]:
+    """Remove explicit aliases and collective descriptions, never legal suffixes."""
+    names = []
+    ignored = []
+    for party in answer.split(";"):
+        if not party.strip():
+            continue
+        name = re.sub(
+            r'\(\s*(?:(?:the|a|an)\s+)?(?:["“]|formerly known as\b)[^)]*\)',
+            "",
+            party,
+            flags=re.IGNORECASE,
+        )
+        if re.search(
+            r"\b(?:collectively|individually|together|jointly)\b.*\bpart(?:y|ies)\b",
+            name,
+            re.IGNORECASE,
+        ):
+            ignored.append(party.strip())
+            continue
+        name = re.sub(r'["“][^"”]*["”]', "", name).strip()
+        if name:
+            names.append(name)
+    return names, ignored
+
+
+def reference_date(answer: str) -> tuple[str | None, str | None]:
+    if not answer.strip():
+        return None, None
+    dates = set()
+    for part in answer.split(";"):
+        part = part.strip()
+        # Incomplete template dates are not fabricated into full dates.
+        if "[" in part or "_" in part:
+            continue
+        for fmt in ("%m/%d/%y", "%m/%d/%Y", "%Y-%m-%d"):
+            try:
+                dates.add(datetime.strptime(part, fmt).date().isoformat())
+                break
+            except ValueError:
+                continue
+        else:
+            return None, "Unsupported reference date format; manual review required."
+    if len(dates) != 1:
+        return (
+            None,
+            "Incomplete or conflicting reference dates; manual review required.",
+        )
+    return dates.pop(), None
 
 
 def evaluate_contract(
     extraction: ContractExtraction, reference: dict[str, str]
 ) -> dict:
-    expected_parties = [
-        re.sub(
-            r'\(\s*(?:["“]|formerly known as\b)[^)]*\)',
-            "",
-            party,
-            flags=re.IGNORECASE,
-        ).strip()
-        for party in reference["Parties-Answer"].split(";")
-        if party.strip()
-    ]
+    expected_parties, ignored_parties = reference_parties(reference["Parties-Answer"])
     actual_parties = [party.value for party in extraction.parties]
     raw_date = reference["Agreement Date-Answer"].strip()
-    expected_date = None
-    date_note = None
-    if raw_date:
-        try:
-            expected_date = datetime.strptime(raw_date, "%m/%d/%y").date().isoformat()
-        except ValueError:
-            date_note = "Reference date format needs manual review."
+    expected_date, date_note = reference_date(raw_date)
     actual_date = (
         extraction.agreement_date.value.isoformat()
         if extraction.agreement_date
@@ -58,23 +94,47 @@ def evaluate_contract(
     )
     expected_law = reference["Governing Law-Answer"].strip() or None
     actual_law = extraction.governing_law.value if extraction.governing_law else None
+    party_match = {normalize_text(p) for p in actual_parties} == {
+        normalize_text(p) for p in expected_parties
+    }
+    party_note = None
+    if ignored_parties:
+        party_note = "Collective party descriptions excluded; see original reference."
+    if not party_match:
+        party_note = "Party names or scope differ; review source and reference. No fuzzy matching or legal-suffix removal applied."
+    if ignored_parties and not expected_parties:
+        party_match = None
+        party_note = (
+            "Reference contains only collective descriptions; manual review required."
+        )
+    law_match = normalize_law(actual_law) == normalize_law(expected_law)
 
     return {
         "parties": {
             "extracted": actual_parties,
             "reference": expected_parties,
-            "match": {normalize_text(p) for p in actual_parties}
-            == {normalize_text(p) for p in expected_parties},
+            "original_reference": reference["Parties-Answer"],
+            "ignored_collective_descriptions": ignored_parties,
+            "match": party_match,
+            "note": party_note,
         },
         "agreement_date": {
             "extracted": actual_date,
             "reference": raw_date or None,
             "match": actual_date == expected_date if date_note is None else None,
-            "note": date_note,
+            "note": date_note
+            or (
+                "Agreement dates differ; review date selection and evidence."
+                if actual_date != expected_date
+                else None
+            ),
         },
         "governing_law": {
             "extracted": actual_law,
             "reference": expected_law,
-            "match": normalize_law(actual_law) == normalize_law(expected_law),
+            "match": law_match,
+            "note": None
+            if law_match
+            else "Jurisdiction wording or scope differs; manual review required. Country and federal-law detail retained.",
         },
     }
